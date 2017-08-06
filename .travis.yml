@@ -5,7 +5,6 @@ php:
 
 before_script:
   - cp .env.travis .env
-  - mysql -e 'create database assessment-suite;'
   - composer self-update
   - composer install --no-interaction
 
