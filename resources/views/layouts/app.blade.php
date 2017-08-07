@@ -10,6 +10,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Fonts -->
+    <link href="{{ asset('css/raleway.css') }}" rel="stylesheet" type="text/css">
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
