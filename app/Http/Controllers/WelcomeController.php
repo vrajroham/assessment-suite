@@ -11,7 +11,6 @@ class WelcomeController extends Controller
      */
     public function __construct()
     {
-        
     }
 
     /**
