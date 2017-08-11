@@ -19,7 +19,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('css/ionicons.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('css/alte-app.css') }}">
- 
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -51,7 +51,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue fixed">
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper" id="app">
 
   <!-- Main Header -->
@@ -66,10 +66,13 @@ desired effect
     </a>
 
     <!-- Header Navbar -->
-    <nav class="navbar navbar-static-top" role="navigation">
+    <nav class="navbar navbar-static-top" >
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
       </a>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
@@ -393,7 +396,8 @@ desired effect
 
 <!-- REQUIRED JS SCRIPTS -->
 <!-- AdminLTE -->
-<script src="{{ asset('js/app1.js') }}"></script>
+{{-- <script src="{{ asset('js/app1.js') }}"></script> --}}
+<script src="{{ asset('js/lte-app.js') }}"></script>
 
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

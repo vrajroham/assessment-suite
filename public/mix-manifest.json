@@ -1,8 +1,10 @@
 {
-  "/js/app.js": "/js/app.js",
-  "/css/app.css": "/css/app.css",
+  "/js/app1.js": "/js/app1.js",
   "/css/alte-app.css": "/css/alte-app.css",
+  "/css/app.css": "/css/app.css",
   "/js/semantic.js": "/js/semantic.js",
-  "/css/mvco-semantic-less.css": "/css/mvco-semantic-less.css",
-  "/mix.js": "/mix.js"
+  "/mix.js": "/mix.js",
+  "/js/app.js": "/js/app.js",
+  "/js/lte-apps.js": "/js/lte-apps.js",
+  "/js/lte-app.js": "/js/lte-app.js"
 }
