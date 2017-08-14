@@ -18,4 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/superuser/setup', 'SuperuserRegistration@registrationStep1')->name('superuser.register');
 Route::get('/demo', 'WelcomeController@index')->name('demo');

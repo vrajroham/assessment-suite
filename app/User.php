@@ -26,4 +26,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get user from usertype.
+     *
+     * @param string $usertype
+     *
+     * @return User
+     */
+    public static function getUserFromUsertype($usertype)
+    {
+        return self::where('usertype', $usertype)->first();
+    }
 }
