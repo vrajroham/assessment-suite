@@ -13,6 +13,7 @@ class SuperuserRegistrationTest extends TestCase
 
     public function testCreatingSuperUseraccount()
     {
+        $this->seed('TestingDatabaseSeeder');
         $this->disableExceptionHandling();
         $response = $this->call('GET', '/superuser/setup');
         $this->assertEquals(200, $response->getStatusCode());
