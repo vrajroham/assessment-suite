@@ -23,3 +23,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'usertype' => $faker->word,
     ];
 });
+
+$factory->define(App\AdminProfile::class, function (Faker\Generator $faker) {
+    return [
+        'users_id' => $faker->number,
+        'email' => $faker->unique()->safeEmail,
+        'designation' => $password ?: $password = bcrypt('secret'),
+    ];
+});

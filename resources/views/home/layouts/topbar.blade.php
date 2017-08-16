@@ -10,7 +10,7 @@
         </div>
         <div class="topbar-right">
             <ul class="topbar-nav nav">
-                <li class="nav-item"><a class="nav-link" href="#" data-scrollto="register-superuser"><i class="fa fa-key"></i> Register</a></li>                
+                <li class="nav-item"><a class="nav-link" href="{{ route('login') }}"><i class="fa fa-key"></i> Login</a></li>                
             </ul>
         </div>
     </div>

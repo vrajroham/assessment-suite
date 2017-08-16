@@ -5,6 +5,7 @@ namespace Tests\Feature\SuperAdminRegistration;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
+use App\AdminProfile;
 use Hash;
 
 class SuperuserRegistrationTest extends TestCase
@@ -21,16 +22,20 @@ class SuperuserRegistrationTest extends TestCase
             'name' => 'Super Admin',
             'email' => 'superadmin@sxample.com',
             'password' => 'mysecretpassword',
-            'usertype' => 'superadmin',
+            'designation' => 'designation',
+            'mobile' => 'mobile',
         ];
         $response = $this->call('POST', '/superuser/setup', $user);
         $this->assertEquals(302, $response->getStatusCode());
         $this_user = User::first();
         $this->assertEquals($user['name'], $this_user->name);
         $this->assertEquals($user['email'], $this_user->email);
-        $this->assertEquals($user['usertype'], $this_user->usertype);
         $this->assertTrue(Hash::check($user['password'], $this_user->password));
 
-        // $user = factory(User::class)->create(['usertype' => 'superadmin']);
+        $same_user = AdminProfile::first();
+        $this->assertEquals($user['designation'], $same_user->designation);
+        $this->assertEquals($user['email'], $same_user->email);
+        $this->assertEquals($user['mobile'], $same_user->mobile);
+        $this->assertEquals($this_user->id, $same_user->id);
     }
 }

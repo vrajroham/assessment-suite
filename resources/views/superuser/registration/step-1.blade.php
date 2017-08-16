@@ -17,29 +17,38 @@
         <link rel="icon" href="{{ asset('img/favicon.png') }}">
 
     </head>
-    <body class="mh-fullscreen bg-img center-vh p-20" style="background-image: url({{ asset('img/bg-4.jpg')  }});">
-
+    <body class="mh-fullscreen bg-img center-vh p-20" style="background-image: url({{ asset('img/bg-4.jpg')  }});">      
         <div class="card card-shadowed p-20 w-400 mb-0" style="max-width: 100%">
+              @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <h5 class="text-uppercase text-center p-10">Register</h5>
             <br><br>
-            <form class="form-type-material">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="E.g. John Doe">
+            <form class="form-type-material" action="{{ route('superuser.register.save') }}" method="post">
+                {{ csrf_field() }}
+                <div class="form-group har-error">
+                    <input type="text" class="form-control" placeholder="E.g. John Doe" name="name" value="{{ old('name') }}">
                 </div>
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="E.g. jondoe@example.com">
+                    <input type="email" class="form-control" placeholder="E.g. jondoe@example.com" name="email" value="{{ old('email') }}">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="E.g. 9876543210">
+                    <input type="text" class="form-control" placeholder="E.g. 9876543210" name="mobile" value="{{ old('mobile') }}">
                 </div>
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="E.g. Professor">
+                    <input type="text" class="form-control" placeholder="E.g. Professor" name="designation" value="{{ old('designation') }}">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" class="form-control" placeholder="Password" name="password">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password (confirm)">
+                    <input type="password" class="form-control" placeholder="Password (confirm)" name="password_confirmation">
                 </div>
                 <div class="form-group">
                     <label class="custom-control custom-checkbox">

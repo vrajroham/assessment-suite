@@ -6,34 +6,24 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-    <title>Helpato - Support System for Themeforest Authors</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800|Dosis:300,600" rel="stylesheet">     -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800|Dosis:300,600" relstylesheet">     -->
     <link href="{{ asset('thesaas/css/core.min.css') }}" rel="stylesheet">    
     <link href="{{ asset('thesaas/css/thesaas.min.css') }}" rel="stylesheet">    
-    <link href="{{ asset('thesaas/css/style.css') }}" rel="stylesheet">    
+    <link href=" asset('thesaas/css/style.css') }}" rel="stylesheet">    
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="{{ asset('img/apple-touch-icon.png') }}">
     <link rel="icon" href="{{ asset('img/favicon.png') }}">
   </head>
-
-  <body id="home">
-
-
     <!-- Topbar -->
-    @include('superuser.registration.layouts.topbar')
-    <!-- END Topbar -->
-
-
-
-
+    @include('home.layouts.topbar')
+    <!-- END Topba
     <!-- Header -->
-    @include('superuser.registration.layouts.header')
+    @include('home.layouts.header')
     <!-- END Header -->
-
-
 
 
     <!-- Main container -->
@@ -43,12 +33,8 @@
     <!-- END Main container -->
 
 
-
-
-
-
     <!-- Footer -->
-	@include('superuser.registration.layouts.footer')    
+	@include('home.layouts.footer')    
     <!-- END Footer -->
 
 

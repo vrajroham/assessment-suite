@@ -1,4 +1,4 @@
-@extends('superuser.registration.app')
+@extends('home.app')
 
 
 @section('content')
