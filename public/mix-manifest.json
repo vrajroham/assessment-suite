@@ -6,5 +6,7 @@
   "/mix.js": "/mix.js",
   "/js/app.js": "/js/app.js",
   "/js/lte-apps.js": "/js/lte-apps.js",
-  "/js/lte-app.js": "/js/lte-app.js"
+  "/js/lte-app.js": "/js/lte-app.js",
+  "/js/thesaas.js": "/js/thesaas.js",
+  "/css/thesaas-styles.css": "/css/thesaas-styles.css"
 }
