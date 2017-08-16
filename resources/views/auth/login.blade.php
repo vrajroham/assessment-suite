@@ -1,68 +1,49 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <title>Login</title>
+        
+        <!-- Styles -->
+        <link href="{{ asset('thesaas/css/core.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('thesaas/css/thesaas.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('thesaas/css/style.css') }}" rel="stylesheet">
+        <!-- Favicons -->
+        <link rel="apple-touch-icon" href="{{ asset('img/apple-touch-icon.png') }}">
+        <link rel="icon" href="{{ asset('img/favicon.png') }}">
+    </head>
+    <body class="mh-fullscreen bg-img center-vh p-20" style="background-image: url({{ asset('img/bg-key1.jpg')  }});">
+        <div class="card card-shadowed p-40 w-400 mb-0" style="max-width: 100%">
+            <h5 class="text-uppercase text-center">Login</h5>
+            <br><br>
+            <form method="post" action="{{ route('login') }}">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" name="email" required="">
                 </div>
-            </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" name="password" required="">
+                </div>
+                <div class="form-group flexbox py-10">
+                    <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" checked>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Remember me</span>
+                    </label>
+                    <a class="text-muted hover-primary fs-13" href="#">Forgot password?</a>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-bold btn-block btn-primary" type="submit">Login</button>
+                </div>
+            </form>            
+            <p class="text-center text-muted fs-13 mt-20">Don't have an account? <a href="{{ url('/') }}">Sign up</a></p>
         </div>
-    </div>
-</div>
-@endsection
+        <!-- Scripts -->
+        <script src="{{ asset('thesaas/js/core.min.js') }}"></script>
+        <script src="{{ asset('thesaas/js/thesaas.min.js') }}"></script>
+        <script src="{{ asset('thesaas/js/script.js') }}"></script>
+    </body>
+</html>

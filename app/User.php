@@ -2,12 +2,14 @@
 
 namespace App;
 
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -26,4 +28,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get user from usertype.
+     *
+     * @param string $usertype
+     *
+     * @return User
+     */
+    public static function getUserFromUsertype($usertype)
+    {
+        return self::where('usertype', $usertype)->first();
+    }
 }
