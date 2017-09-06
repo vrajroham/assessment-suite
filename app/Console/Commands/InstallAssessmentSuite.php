@@ -3,7 +3,7 @@
 /**
  * Give credits where credits are due.
  * ---------------------------------
- * This file was the part of Assessment Suite.
+ * This file was the part of CachetHQ
  * We used some part of their install command.
  * Thanks to Assessment Suite Team and original author.
  *
