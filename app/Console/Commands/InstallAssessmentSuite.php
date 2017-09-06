@@ -3,7 +3,7 @@
 /**
  * Give credits where credits are due.
  * ---------------------------------
- * This file was the part of Assessment Suite.
+ * This file was the part of CachetHQ
  * We used some part of their install command.
  * Thanks to Assessment Suite Team and original author.
  *
@@ -12,6 +12,7 @@
 
 namespace App\Console\Commands;
 
+use App\User;
 use Dotenv\Dotenv;
 use Illuminate\Console\Command;
 
@@ -46,7 +47,16 @@ class InstallAssessmentSuite extends Command
      */
     public function handle()
     {
-        if (!$this->confirm('Do you want to install Assessment Suite?')) {
+        $user = User::where('usertype', 'superadmin')->first();
+        if ($user) {
+            $this->error('It seems admin account is already created');
+            if (! $this->confirm('Do you still want to continue?')) {
+                $this->line('Flight Aborted. Bye!');
+
+                return;
+            }
+        }
+        if (! $this->confirm('Do you want to install Assessment Suite?')) {
             $this->line('Flight Aborted. Bye!');
 
             return;
@@ -59,7 +69,7 @@ class InstallAssessmentSuite extends Command
         $this->configureDrivers();
         $this->makeMigrations();
         $this->seedDatabase();
-
+        $this->createSuperAdmin();
         $this->info('Assessment Suite is installed ⚡');
     }
 
@@ -135,7 +145,7 @@ class InstallAssessmentSuite extends Command
         // Format the settings ready to display them in the table.
         $this->formatConfigsTable($config);
 
-        if (!$this->confirm('Are these settings correct?')) {
+        if (! $this->confirm('Are these settings correct?')) {
             return $this->configureDatabase($config);
         }
 
@@ -205,7 +215,7 @@ class InstallAssessmentSuite extends Command
         // Format the settings ready to display them in the table.
         $this->formatConfigsTable($config);
 
-        if (!$this->confirm('Are these settings correct?')) {
+        if (! $this->confirm('Are these settings correct?')) {
             return $this->configureDrivers($config);
         }
 
@@ -235,7 +245,7 @@ class InstallAssessmentSuite extends Command
         ], $config);
 
         // Don't continue with these settings if we're not interested in notifications.
-        if (!$this->confirm('Do you want Assessment Suite to send mail notifications?')) {
+        if (! $this->confirm('Do you want Assessment Suite to send mail notifications?')) {
             return;
         }
 
@@ -250,7 +260,7 @@ class InstallAssessmentSuite extends Command
             'log' => 'Log (Testing)',
         ]);
 
-        if (!$config['MAIL_DRIVER'] === 'log') {
+        if (! $config['MAIL_DRIVER'] === 'log') {
             if ($config['MAIL_DRIVER'] === 'smtp') {
                 $config['MAIL_HOST'] = $this->ask('Please supply your mail server host');
             }
@@ -268,7 +278,7 @@ class InstallAssessmentSuite extends Command
         // Format the settings ready to display them in the table.
         $this->formatConfigsTable($config);
 
-        if (!$this->confirm('Are these settings correct?')) {
+        if (! $this->confirm('Are these settings correct?')) {
             return $this->configureMail($config);
         }
 
@@ -363,5 +373,30 @@ class InstallAssessmentSuite extends Command
         $this->call('db:seed');
         $this->info('Database Seeded.');
         $this->info('--------------------------------------------------------------');
+    }
+
+    public function createSuperAdmin()
+    {
+        $config['name'] = null;
+        $config['email'] = null;
+        $config['password'] = null;
+
+        $config['name'] = $this->ask('Name of administrator? ', $config['name']);
+
+        $config['email'] = $this->ask('Email address of administrator?', $config['email']);
+
+        $config['password'] = $this->secret('Password for administrator account? (E.g. secret)', $config['password']);
+
+        $this->formatConfigsTable($config);
+
+        if (! $this->confirm('Are these credentials correct?')) {
+            return $this->createSuperAdmin();
+        }
+        $user = new User();
+        $user->name = $config['name'];
+        $user->email = $config['email'];
+        $user->password = bcrypt($config['password']);
+        $user->save();
+        $this->info('Administrator account created successfully');
     }
 }

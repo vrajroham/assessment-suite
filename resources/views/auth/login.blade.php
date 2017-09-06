@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <meta name="keywords" content="">
         <title>Login</title>
-        
+
         <!-- Styles -->
         <link href="{{ asset('thesaas/css/core.min.css') }}" rel="stylesheet">
         <link href="{{ asset('thesaas/css/thesaas.min.css') }}" rel="stylesheet">
@@ -21,15 +21,25 @@
             <br><br>
             <form method="post" action="{{ route('login') }}">
                 {{ csrf_field() }}
-                <div class="form-group">
+                <div class="form-group{{ $errors->has('email') ? ' text-danger' : '' }}">
                     <input type="text" class="form-control" placeholder="Username" name="email" required="">
+                    @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
                 </div>
-                <div class="form-group">
+                <div class="form-group{{ $errors->has('password') ? ' text-danger' : '' }}">
                     <input type="password" class="form-control" placeholder="Password" name="password" required="">
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="form-group flexbox py-10">
                     <label class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" checked>
+                        <input type="checkbox" class="custom-control-input" name="remember" {{ old('remember') ? 'checked' : '' }}>
                         <span class="custom-control-indicator"></span>
                         <span class="custom-control-description">Remember me</span>
                     </label>
@@ -38,7 +48,7 @@
                 <div class="form-group">
                     <button class="btn btn-bold btn-block btn-primary" type="submit">Login</button>
                 </div>
-            </form>            
+            </form>
             <p class="text-center text-muted fs-13 mt-20">Don't have an account? <a href="{{ url('/') }}">Sign up</a></p>
         </div>
         <!-- Scripts -->

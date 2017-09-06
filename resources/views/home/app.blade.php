@@ -10,9 +10,9 @@
 
     <!-- Styles -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800|Dosis:300,600" relstylesheet">     -->
-    <link href="{{ asset('thesaas/css/core.min.css') }}" rel="stylesheet">    
-    <link href="{{ asset('thesaas/css/thesaas.min.css') }}" rel="stylesheet">    
-    <link href=" asset('thesaas/css/style.css') }}" rel="stylesheet">    
+    <link href="{{ asset('thesaas/css/core.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('thesaas/css/thesaas.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('thesaas/css/style.css') }}" rel="stylesheet">
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="{{ asset('img/apple-touch-icon.png') }}">
@@ -34,15 +34,15 @@
 
 
     <!-- Footer -->
-	@include('home.layouts.footer')    
+	@include('home.layouts.footer')
     <!-- END Footer -->
 
 
 
     <!-- Scripts -->
-    <script src="{{ asset('thesaas/js/core.min.js') }}"></script>    
-    <script src="{{ asset('thesaas/js/thesaas.min.js') }}"></script>    
-    <script src="{{ asset('thesaas/js/script.js') }}"></script>    
+    <script src="{{ asset('thesaas/js/core.min.js') }}"></script>
+    <script src="{{ asset('thesaas/js/thesaas.min.js') }}"></script>
+    <script src="{{ asset('thesaas/js/script.js') }}"></script>
 
   </body>
 </html>
