@@ -12,9 +12,9 @@
 
 namespace App\Console\Commands;
 
+use App\User;
 use Dotenv\Dotenv;
 use Illuminate\Console\Command;
-use App\User;
 
 class InstallAssessmentSuite extends Command
 {
@@ -50,13 +50,13 @@ class InstallAssessmentSuite extends Command
         $user = User::where('usertype', 'superadmin')->first();
         if ($user) {
             $this->error('It seems admin account is already created');
-            if (!$this->confirm('Do you still want to continue?')) {
+            if (! $this->confirm('Do you still want to continue?')) {
                 $this->line('Flight Aborted. Bye!');
 
                 return;
             }
         }
-        if (!$this->confirm('Do you want to install Assessment Suite?')) {
+        if (! $this->confirm('Do you want to install Assessment Suite?')) {
             $this->line('Flight Aborted. Bye!');
 
             return;
@@ -145,7 +145,7 @@ class InstallAssessmentSuite extends Command
         // Format the settings ready to display them in the table.
         $this->formatConfigsTable($config);
 
-        if (!$this->confirm('Are these settings correct?')) {
+        if (! $this->confirm('Are these settings correct?')) {
             return $this->configureDatabase($config);
         }
 
@@ -215,7 +215,7 @@ class InstallAssessmentSuite extends Command
         // Format the settings ready to display them in the table.
         $this->formatConfigsTable($config);
 
-        if (!$this->confirm('Are these settings correct?')) {
+        if (! $this->confirm('Are these settings correct?')) {
             return $this->configureDrivers($config);
         }
 
@@ -245,7 +245,7 @@ class InstallAssessmentSuite extends Command
         ], $config);
 
         // Don't continue with these settings if we're not interested in notifications.
-        if (!$this->confirm('Do you want Assessment Suite to send mail notifications?')) {
+        if (! $this->confirm('Do you want Assessment Suite to send mail notifications?')) {
             return;
         }
 
@@ -260,7 +260,7 @@ class InstallAssessmentSuite extends Command
             'log' => 'Log (Testing)',
         ]);
 
-        if (!$config['MAIL_DRIVER'] === 'log') {
+        if (! $config['MAIL_DRIVER'] === 'log') {
             if ($config['MAIL_DRIVER'] === 'smtp') {
                 $config['MAIL_HOST'] = $this->ask('Please supply your mail server host');
             }
@@ -278,7 +278,7 @@ class InstallAssessmentSuite extends Command
         // Format the settings ready to display them in the table.
         $this->formatConfigsTable($config);
 
-        if (!$this->confirm('Are these settings correct?')) {
+        if (! $this->confirm('Are these settings correct?')) {
             return $this->configureMail($config);
         }
 
@@ -389,7 +389,7 @@ class InstallAssessmentSuite extends Command
 
         $this->formatConfigsTable($config);
 
-        if (!$this->confirm('Are these credentials correct?')) {
+        if (! $this->confirm('Are these credentials correct?')) {
             return $this->createSuperAdmin();
         }
         $user = new User();
