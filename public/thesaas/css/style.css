@@ -24,6 +24,10 @@
   padding-top: 60px;
 }
 
+.thesaas-sections-split.topbar-reveal .main-content .topbar-nav {
+  display: none;
+}
+
 @media (max-width: 768px) {
 
   .thesaas-sections-split .section,
@@ -33,3 +37,4 @@
   }
 
 }
+

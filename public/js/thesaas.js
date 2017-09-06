@@ -6288,21 +6288,21 @@ $(function () {
 
 "use strict";
 /*!
- * TheSaaS v1.3.3 (http://thetheme.io/thesaas)
+ * TheSaaS v1.4.0 (http://thetheme.io/thesaas)
  * Copyright 2017 TheThemeio
  * Licensed under the Themeforest Standard Licenses
  */
 
 
 +function (a, b) {
-  var c = { name: "TheSaaS", version: "1.3.3" };c.defaults = { googleApiKey: null, googleAnalyticsId: null, smoothScroll: !0 }, c.breakpoint = { xs: 576, sm: 768, md: 992, lg: 1200 }, c.config = function (d) {
+  var c = { name: "TheSaaS", version: "1.4.0" };c.defaults = { googleApiKey: null, googleAnalyticsId: null, smoothScroll: !0 }, c.breakpoint = { xs: 576, sm: 768, md: 992, lg: 1200 }, c.config = function (d) {
     if ("string" == typeof d) return c.defaults[d];a.extend(!0, c.defaults, d), c.defaults.smoothScroll || SmoothScroll.destroy(), a('[data-provide~="map"]').length && void 0 === b["google.maps.Map"] && a.getScript("https://maps.googleapis.com/maps/api/js?key=" + c.defaults.googleApiKey + "&callback=thesaas.map"), c.defaults.googleAnalyticsId && (!function (a, b, c, d, e, f, g) {
       a.GoogleAnalyticsObject = e, a[e] = a[e] || function () {
         (a[e].q = a[e].q || []).push(arguments);
       }, a[e].l = 1 * new Date(), f = b.createElement(c), g = b.getElementsByTagName(c)[0], f.async = 1, f.src = "https://www.google-analytics.com/analytics.js", g.parentNode.insertBefore(f, g);
     }(b, document, "script", 0, "ga"), ga("create", c.defaults.googleAnalyticsId, "auto"), ga("send", "pageview"));
   }, c.init = function () {
-    c.topbar(), c.parallax(), c.carousel(), c.scrolling(), c.counter(), c.aos(), c.typed(), c.contact(), c.constellation(), c.shuffle(), a(document).on("click", '[data-provide~="lightbox"]', lity), a(document).on("click", ".video-wrapper .btn", function () {
+    c.topbar(), c.parallax(), c.carousel(), c.scrolling(), c.counter(), c.aos(), c.typed(), c.contact(), c.mailer(), c.constellation(), c.shuffle(), a(document).on("click", '[data-provide~="lightbox"]', lity), a(document).on("click", ".video-wrapper .btn", function () {
       var b = a(this).closest(".video-wrapper");if (b.addClass("reveal"), b.find("video").length && b.find("video").get(0).play(), b.find("iframe").length) {
         var c = b.find("iframe");c.attr("src").indexOf("?") > 0 ? c.get(0).src += "&autoplay=1" : c.get(0).src += "?autoplay=1";
       }
@@ -6322,8 +6322,7 @@ $(function () {
   }, c.parallax = function () {
     a("[data-parallax]").each(function () {
       var b = a(this),
-          c = b.data("parallax"),
-          d = .3;a(this).hasClass("header") && (d = .6), b.parallax({ imageSrc: c, speed: d, bleed: 50 });
+          d = { imageSrc: b.data("parallax"), speed: .3, bleed: 50 };a(this).hasClass("header") && (d.speed = .6), d = a.extend(d, c.getDataOptions(b)), b.parallax(d);
     });
   }, c.map = function () {
     a('[data-provide~="map"]').each(function () {
@@ -6372,7 +6371,8 @@ $(function () {
       c.toggleClass("topbar-reveal"), a(this).remove();
     }), a(document).on("click", ".topbar-reveal .topbar-nav .nav-item > .nav-link", function () {
       var b = a(this),
-          c = b.next(".nav-submenu");b.closest(".topbar-nav").find(".nav-submenu").not(c).slideUp(), c.slideToggle();
+          c = b.next(".nav-submenu"),
+          d = b.closest(".nav-submenu");b.closest(".topbar-nav").find(".nav-submenu").not(c).not(d).slideUp(), c.slideToggle();
     }), a(document).on("click", ".topbar-reveal .topbar-nav .nav-link", function () {
       a(this).hasDataAttr("scrollto") && (c.removeClass("topbar-reveal"), a(".topbar-backdrop").remove());
     });
@@ -6389,11 +6389,27 @@ $(function () {
           d = a("#contact-message").val(),
           e = "name=" + b + "&email=" + c + "&message=" + d,
           f = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-          g = a("#contact-error");return c.length < 1 ? void g.html("Please enter your email address.").fadeIn(500) : f.test(c) ? void a.ajax({ type: "POST", url: "assets/php/sendmail.php", data: e, success: function success() {
+          g = a("#contact-error");return c.length < 1 ? void g.html("Please enter your email address.").fadeIn(500) : f.test(c) ? void a.ajax({ type: "POST", url: "assets/php/sendmail_depricated.php", data: e, success: function success() {
           g.fadeOut(400), a("#contact-success").fadeIn(1e3), a("#contact-name, #contact-email, #contact-message").val("");
         }, error: function error() {
           g.html("There is a problem in our email service. Please try again later.").fadeIn(500);
         } }) : void g.html("Please enter a valid email address.").fadeIn(500);
+    });
+  }, c.mailer = function () {
+    var b = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;a('[data-form="mailer"]').each(function () {
+      var c = a(this),
+          d = c.find('[name="email"]'),
+          e = c.find('[name="message"]'),
+          f = d.closest(".form-group"),
+          g = e.closest(".form-group");c.on("submit", function () {
+        return c.children(".alert-danger").remove(), d.length && (d.val().length < 1 || !b.test(d.val())) ? (f.addClass("has-danger"), !1) : e.length && e.val().length < 1 ? (g.addClass("has-danger"), !1) : (a.ajax({ type: "POST", url: c.attr("action"), data: c.serializeArray() }).done(function (b) {
+          var d = a.parseJSON(b);"success" == d.status ? (c.find(".alert-success").fadeIn(1e3), c.find(":input").val("")) : (c.prepend('<div class="alert alert-danger">' + d.message + "</div>"), console.log(d.reason));
+        }), !1);
+      }), d.on("focus", function () {
+        f.removeClass("has-danger");
+      }), e.on("focus", function () {
+        g.removeClass("has-danger");
+      });
     });
   }, c.constellation = function () {
     var c = "rgba(255, 255, 255, .8)",
