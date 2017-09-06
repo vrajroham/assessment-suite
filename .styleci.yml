@@ -1,3 +1,9 @@
 preset: laravel
 
 linting: true
+
+finder:
+  exclude:
+    - "tests"
+    - "assets"
+    - "resources"

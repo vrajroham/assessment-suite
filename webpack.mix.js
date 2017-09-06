@@ -11,15 +11,25 @@ const { mix } = require('laravel-mix');
  |
  */
 mix.options({ processCssUrls: false });
-mix.js('resources/assets/js/app.js', 'public/js')
-	.less('resources/assets/less/app.less', 'public/css/alte-app.css')
-	.sass('resources/assets/sass/app.scss', 'public/css')
-
-	.js('node_modules/semantic-ui/dist/semantic.js', 'public/js/semantic.js')
-	.css('node_modules/semantic-ui/dist/semantic.css', 'public/css/semantic.css')
-	.js([
+mix.js('resources/assets/js/app.js', 'public/js/app.js')
+    .js([
             'resources/assets/js/app.js',
-            'resources/assets/admin-lte/js/app.js',
-            'resources/assets/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js',
-        ],'public/js/lte-app.js');
+            'resources/assets/alte/js/app.js',
+            'resources/assets/alte/plugins/slimScroll/jquery.slimscroll.min.js',
+        ],'public/js/lte-app.js')
+    .js([
+    		'resources/assets/thesaas/js/core.min.js',
+    		'resources/assets/thesaas/js/thesaas.min.js',
+    		'resources/assets/thesaas/js/script.js',
+    	],'public/js/thesaas.js')
+	.js('node_modules/semantic-ui/dist/semantic.js', 'public/js/semantic.js')
+	.combine([
+			'resources/assets/thesaas/css/core.min.css',
+			'resources/assets/thesaas/css/thesaas.min.css',
+			'resources/assets/thesaas/css/style.css'
+		],'public/css/thesaas-styles.css')
+    .less('resources/assets/less/app.less', 'public/css/alte-app.css')
+    .sass('resources/assets/sass/app.scss', 'public/css')
+	.css('node_modules/semantic-ui/dist/semantic.css', 'public/css/semantic.css');
+
 
