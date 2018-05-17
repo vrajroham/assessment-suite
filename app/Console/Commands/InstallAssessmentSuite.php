@@ -47,15 +47,15 @@ class InstallAssessmentSuite extends Command
      */
     public function handle()
     {
-        $user = User::where('usertype', 'superadmin')->first();
-        if ($user) {
-            $this->error('It seems admin account is already created');
-            if (! $this->confirm('Do you still want to continue?')) {
-                $this->line('Flight Aborted. Bye!');
+        // $user = User::where('usertype', 'superadmin')->first();
+        // if ($user) {
+        //     $this->error('It seems admin account is already created');
+        //     if (! $this->confirm('Do you still want to continue?')) {
+        //         $this->line('Flight Aborted. Bye!');
 
-                return;
-            }
-        }
+        //         return;
+        //     }
+        // }
         if (! $this->confirm('Do you want to install Assessment Suite?')) {
             $this->line('Flight Aborted. Bye!');
 
